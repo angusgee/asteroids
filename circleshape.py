@@ -2,10 +2,8 @@ import pygame
 
 class CircleShape(pygame.sprite.Sprite):
     def __init__(self, x, y, radius):
-        # Initialize the sprite first
         super().__init__()
         
-        # Then add to containers if they exist
         if hasattr(self, 'containers'):
             for container in self.containers:
                 if self not in container:
@@ -20,3 +18,10 @@ class CircleShape(pygame.sprite.Sprite):
 
     def update(self, dt):
         pass
+
+    def check_collisions(self, other):
+        # Calculate distance between the centers of the two shapes
+        distance = self.position.distance_to(other.position)
+        
+        # Check if the distance is less than or equal to the sum of the radii
+        return distance <= (self.radius + other.radius)

@@ -53,6 +53,12 @@ def main():
         # Print debug info about asteroids
         print(f"Number of asteroids: {len(asteroids)}")
         
+        # Check for collisions between player and asteroids
+        for asteroid in asteroids:
+            if player.check_collisions(asteroid):
+                print("Game over!")
+                return
+        
         # draw all drawable objects
         for obj in drawable:
             obj.draw(screen)
