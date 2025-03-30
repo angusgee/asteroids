@@ -11,7 +11,7 @@ def main():
     print(f'Screen width: {SCREEN_WIDTH}')
     print(f'Screen height: {SCREEN_HEIGHT}')
     
-    # Create player in the middle of the screen
+    # Create player in middle of screen
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
     
     while(True):
@@ -21,7 +21,12 @@ def main():
                 return
         screen.fill('black')
         player.draw(screen)
+        player.update(dt)
+
+        # render screen
         pygame.display.flip()
+
+        # set to 60 FPS
         time_passed = pygame_clock.tick(60)
         dt = time_passed / 1000
 
