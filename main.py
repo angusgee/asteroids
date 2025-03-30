@@ -3,6 +3,7 @@ from constants import *
 from player import Player
 from asteroid import Asteroid
 from asteroidfield import AsteroidField
+from shot import Shot
 
 def main(): 
     pygame.init()
@@ -19,9 +20,15 @@ def main():
     
     # create asteroid group
     asteroids = pygame.sprite.Group()
+
+    # create shots group
+    shots = pygame.sprite.Group()
     
     # set asteroid containers
     Asteroid.containers = asteroids, updatable, drawable
+
+    # set shot containers
+    Shot.containers = shots, updatable, drawable
 
     # set asteroid field containers to a tuple
     AsteroidField.containers = (updatable,)
@@ -51,7 +58,7 @@ def main():
             obj.update(dt)
         
         # Print debug info about asteroids
-        print(f"Number of asteroids: {len(asteroids)}")
+        # print(f"Number of asteroids: {len(asteroids)}")
         
         # Check for collisions between player and asteroids
         for asteroid in asteroids:

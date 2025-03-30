@@ -42,7 +42,7 @@ class AsteroidField(pygame.sprite.Sprite):
         return asteroid
 
     def update(self, dt):
-        print("AsteroidField update called")
+        # print("AsteroidField update called")
         self.spawn_timer += dt
         if self.spawn_timer > ASTEROID_SPAWN_RATE:
             self.spawn_timer = 0
