@@ -2,10 +2,14 @@ import pygame
 
 class CircleShape(pygame.sprite.Sprite):
     def __init__(self, x, y, radius):
+        # Initialize the sprite first
+        super().__init__()
+        
+        # Then add to containers if they exist
         if hasattr(self, 'containers'):
-            super().__init__(self.containers)
-        else:
-            super().__init__()
+            for container in self.containers:
+                if self not in container:
+                    container.add(self)
 
         self.position = pygame.Vector2(x, y)
         self.velocity = pygame.Vector2(0, 0)
@@ -16,4 +20,3 @@ class CircleShape(pygame.sprite.Sprite):
 
     def update(self, dt):
         pass
-
