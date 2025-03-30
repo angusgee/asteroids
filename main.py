@@ -57,14 +57,32 @@ def main():
         for obj in list(updatable):
             obj.update(dt)
         
-        # Print debug info about asteroids
-        # print(f"Number of asteroids: {len(asteroids)}")
-        
         # Check for collisions between player and asteroids
         for asteroid in asteroids:
             if player.check_collisions(asteroid):
                 print("Game over!")
                 return
+        
+        # Check for collisions between bullets and asteroids
+        for asteroid in list(asteroids):
+            for shot in list(shots):
+                if shot.check_collisions(asteroid):
+                    # Kill the objects (removes them from pygame sprite groups)
+                    shot.kill()
+                    asteroid.kill()
+                    
+                    # Manually remove from drawable and updatable sets
+                    # since these are not pygame sprite groups and kill() won't affect them
+                    if shot in drawable:
+                        drawable.remove(shot)
+                    if shot in updatable:
+                        updatable.remove(shot)
+                    if asteroid in drawable:
+                        drawable.remove(asteroid)
+                    if asteroid in updatable:
+                        updatable.remove(asteroid)
+                    
+                    break  # Break after finding a collision to avoid checking a dead asteroid
         
         # draw all drawable objects
         for obj in drawable:
