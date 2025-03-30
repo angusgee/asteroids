@@ -1,7 +1,6 @@
 import pygame 
 from constants import * 
-
-import pygame
+from player import Player
 
 def main(): 
     pygame.init()
@@ -11,17 +10,20 @@ def main():
     print('Starting Asteroids!')
     print(f'Screen width: {SCREEN_WIDTH}')
     print(f'Screen height: {SCREEN_HEIGHT}')
+    
+    # Create player in the middle of the screen
+    player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
+    
     while(True):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 print('>> exiting game...')
                 return
         screen.fill('black')
+        player.draw(screen)
         pygame.display.flip()
         time_passed = pygame_clock.tick(60)
         dt = time_passed / 1000
-        print(dt)
 
 if __name__ == "__main__":
     main()
-
