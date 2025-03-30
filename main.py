@@ -67,20 +67,21 @@ def main():
         for asteroid in list(asteroids):
             for shot in list(shots):
                 if shot.check_collisions(asteroid):
-                    # Kill the objects (removes them from pygame sprite groups)
+                    # Kill the shot (removes it from pygame sprite groups)
                     shot.kill()
-                    asteroid.kill()
                     
-                    # Manually remove from drawable and updatable sets
+                    # Call split() on the asteroid instead of kill()
+                    asteroid.split()
+                    
+                    # Manually remove the shot from drawable and updatable sets
                     # since these are not pygame sprite groups and kill() won't affect them
                     if shot in drawable:
                         drawable.remove(shot)
                     if shot in updatable:
                         updatable.remove(shot)
-                    if asteroid in drawable:
-                        drawable.remove(asteroid)
-                    if asteroid in updatable:
-                        updatable.remove(asteroid)
+                    
+                    # No need to manually remove the asteroid from drawable and updatable
+                    # as the split() method already calls kill() on the asteroid
                     
                     break  # Break after finding a collision to avoid checking a dead asteroid
         
